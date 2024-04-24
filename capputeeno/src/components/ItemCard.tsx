@@ -1,22 +1,18 @@
-import imagem from "../assets/image.png"
+import imagem from '../assets/image.png';
 
 export default function ItemCard() {
-   return (
-      <button onClick={() => (window.location.href = "/caneca")}
-      >
-         <div className='w-64 h-[378px]  rounded' >
-            <div className='h-[300px]'>
-               <img src={imagem} alt="Imagem" />
-            </div>
-            <div className='flex flex-col justify-center h-[78px]  bg-white pl-3 rounded-t-none gap-1 '>
-               <div className='border-b pb-[8px]'>
-                  Caneca de cerâmica rústica
-               </div>
-               <div className='font-bold'>
-                  R$ 40,00
-               </div>
-            </div>
-         </div>
-      </button>
-   )
+	return (
+		<button
+			onClick={() => (window.location.href = '/caneca')}
+			className="h-[378px]  w-64 overflow-hidden rounded-lg"
+		>
+			<div className="h-[300px]">
+				<img src={imagem} alt="Imagem" />
+			</div>
+			<div className="flex h-[78px] flex-col items-start justify-center  gap-1 rounded-t-none bg-white pl-3 ">
+				<div className="border-b pb-[8px]">Caneca de cerâmica rústica</div>
+				<div className="font-bold">R$ 40,00</div>
+			</div>
+		</button>
+	);
 }
