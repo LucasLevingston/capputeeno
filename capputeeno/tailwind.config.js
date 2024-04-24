@@ -7,8 +7,11 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'saira': ['Saira Stencil One', 'sans-serif'],
+        'saira-stencil': ['Saira Stencil One', 'sans-serif'],
+        'saira': ['Saira', 'sans-serif']
+
       },
+
     },
   },
   plugins: [],

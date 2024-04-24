@@ -8,7 +8,7 @@ interface ContainerProps {
 
 const Container: React.FC<ContainerProps> = ({ children }) => {
    return (
-      <div>
+      <div className="flex flex-col h-full min-h-screen">
          <Header />
          <div className='w-full bg-[#F0F0F5] h-full px-5 pt-[34px] md:px-40'>
             {children}
