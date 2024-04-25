@@ -20,7 +20,9 @@ export default function ItemCarrinhoCard() {
                Aqui vem um texto descritivo do produto, esta caixa de texto servirá apenas de exemplo para que simule algum texto que venha a ser inserido nesse campo, descrevendo tal produto.
             </h1>
             <div className='flex justify-between'>
-               <button className=" h-8 w-16 rounded-lg gap-5 bg-[#E9E9F0] flex items-center justify-center border border-[#A8A8B3]">
+               <button
+                  className=" h-8 w-16 rounded-lg gap-5 bg-[#E9E9F0] flex items-center justify-center border border-[#A8A8B3]"
+               >
                   <span className='text-[16px] text-[#737380]'>
                      1
                   </span>

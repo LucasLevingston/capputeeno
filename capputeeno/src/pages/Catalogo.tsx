@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Container from '../components/Container';
-import ItemCard from '../components/ItemCard';
+// import ItemCard from '../components/ItemCard';
 import PageButton from '../components/PageButton';
 import { SlArrowDown, SlArrowLeft, SlArrowRight } from 'react-icons/sl';
+import ProdutosComponent from '../components/ProdutosComponent';
+// import { getProdutos } from '../hooks/useProducts';
 
 export default function Catalogo() {
 	const [botaoSelecionado, setBotaoSelecionado] = useState('todos');
@@ -66,10 +68,7 @@ export default function Catalogo() {
 					</div>
 				</div>
 				<div className="flex flex-wrap gap-5 pt-[110px]">
-					<ItemCard />
-					<ItemCard />
-					<ItemCard />
-					<ItemCard />
+					<ProdutosComponent />
 				</div>
 			</Container>
 		</div>

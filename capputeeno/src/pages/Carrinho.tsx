@@ -27,12 +27,9 @@ export default function Carrinho() {
                   </div>
                   <div className='gap-4  flex flex-col'>
                      <ItemCarrinhoCard />
-                     <ItemCarrinhoCard />
-                     <ItemCarrinhoCard />
-                     <ItemCarrinhoCard />
                   </div>
                </div>
-               <div className='bg-white w-[30%] p-6 flex flex-col justify-between min-h-[90%] '>
+               <div className='bg-white w-[30%] p-6 flex flex-col justify-between h-[700px]'>
                   <div className='space-y-7'>
                      <h1 className='font-bold pb-6'>
                         RESUMO DO PEDIDO
