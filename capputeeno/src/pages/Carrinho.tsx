@@ -14,15 +14,23 @@ export default function Carrinho() {
                Voltar
             </button>
             <div className='flex '>
-               <div className='w-[60%] '>
-                  <h1 className='text-[24px] leading-9'>
-                     SEU CARRINHO
-                  </h1>
-                  <p className='text-[16px]'>
-                     Total (3 produtos)
-                     <span className='font-bold'> R$161,00</span>
+               <div className='w-[60%]  space-y-3'>
+                  <div>
+
+                     <h1 className='text-[24px] leading-9'>
+                        SEU CARRINHO
+                     </h1>
+                     <p className='text-[16px]'>
+                        Total (3 produtos)
+                        <span className='font-bold'> R$161,00</span>
+                     </p>
+                  </div>
+                  <div className='gap-4  flex flex-col'>
                      <ItemCarrinhoCard />
-                  </p>
+                     <ItemCarrinhoCard />
+                     <ItemCarrinhoCard />
+                     <ItemCarrinhoCard />
+                  </div>
                </div>
                <div className='bg-white w-[30%] p-6 flex flex-col justify-between min-h-[90%] '>
                   <div className='space-y-7'>
