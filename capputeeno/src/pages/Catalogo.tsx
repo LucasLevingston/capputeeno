@@ -1,13 +1,11 @@
 import { useState } from 'react';
 import Container from '../components/Container';
-// import ItemCard from '../components/ItemCard';
 import PageButton from '../components/PageButton';
 import { SlArrowDown, SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import ProdutosComponent from '../components/ProdutosComponent';
-// import { getProdutos } from '../hooks/useProducts';
 
 export default function Catalogo() {
-	const [botaoSelecionado, setBotaoSelecionado] = useState('todos');
+	const [botaoSelecionado, setBotaoSelecionado] = useState('all');
 
 	return (
 		<div className="">
@@ -15,9 +13,9 @@ export default function Catalogo() {
 				<div className="flex justify-between">
 					<ul className="flex items-center gap-x-5 text-[#737380]">
 						<button
-							onClick={() => setBotaoSelecionado('todos')}
+							onClick={() => setBotaoSelecionado('all')}
 							className={
-								botaoSelecionado === 'todos'
+								botaoSelecionado === 'all'
 									? 'border-b-4 border-[#FFA585] pb-1 font-bold text-black'
 									: 'pb-2'
 							}
@@ -25,9 +23,11 @@ export default function Catalogo() {
 							<li>TODOS OS PRODUTOS</li>
 						</button>
 						<button
-							onClick={() => setBotaoSelecionado('camisetas')}
+							onClick={() =>
+								setBotaoSelecionado('t-shirts')
+							}
 							className={
-								botaoSelecionado === 'camisetas'
+								botaoSelecionado === 't-shirts'
 									? 'border-b-4 border-[#FFA585] pb-1 font-bold text-black'
 									: 'pb-2'
 							}
@@ -35,9 +35,9 @@ export default function Catalogo() {
 							<li>CAMISETAS</li>
 						</button>
 						<button
-							onClick={() => setBotaoSelecionado('canecas')}
+							onClick={() => setBotaoSelecionado('mugs')}
 							className={
-								botaoSelecionado === 'canecas'
+								botaoSelecionado === 'mugs'
 									? 'border-b-4 border-[#FFA585] pb-1 font-bold text-black'
 									: 'pb-2'
 							}
@@ -67,10 +67,8 @@ export default function Catalogo() {
 						</div>
 					</div>
 				</div>
-				<div className="flex flex-wrap gap-5 pt-[110px]">
-					<ProdutosComponent />
-				</div>
-			</Container>
-		</div>
+				<ProdutosComponent selecionado={botaoSelecionado} />
+			</Container >
+		</div >
 	);
 }

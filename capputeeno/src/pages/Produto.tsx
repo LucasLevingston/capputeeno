@@ -2,8 +2,15 @@ import Container from '../components/Container';
 import imagem from '../assets/image.png';
 import { MdOutlineShoppingBag } from 'react-icons/md';
 import { SlArrowLeftCircle } from 'react-icons/sl';
+import { useParams } from 'react-router-dom';
+import { getProdutoById } from '../hooks/useProducts';
 
 function Produto() {
+	const { id } = useParams<{ id: string }>();
+	if (id) {
+		const produto = getProdutoById(id);
+		console.log(produto)
+	}
 	return (
 		<Container>
 			<button
@@ -20,7 +27,7 @@ function Produto() {
 						<p className="text-[16px] leading-[24px] ">Caneca</p>
 						<div>
 							<h1 className="text-[32px] leading-[48px] text-[#41414D]">
-								Caneca de cerâmica rústica
+								{/* {produto.name} */}
 							</h1>
 							<h1 className="text-[20px] font-bold leading-[30px]">R$ 40,00</h1>
 						</div>

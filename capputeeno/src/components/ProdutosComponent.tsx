@@ -3,7 +3,8 @@ import ItemCard from './ItemCard';
 import { getProdutos } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
 
-const ProdutosComponent = () => {
+function ProdutosComponent({ selecionado }: { selecionado: string }) {
+
    const [produtos, setProdutos] = useState<ProdutoType[]>([]);
 
    useEffect(() => {
@@ -18,18 +19,24 @@ const ProdutosComponent = () => {
 
       fetchProdutos();
    }, []);
-
    return (
-      <div className="flex flex-wrap gap-5 pt-[110px]">
+      <div className="flex flex-wrap gap-20 pt-[30px]">
          {produtos && produtos.length > 0 ? (
-            produtos.map(produto => (
-               <ItemCard key={produto.id} produto={produto} />
+            produtos.slice(0, 12).map(produto => (
+               selecionado === 'all' ? (
+                  <ItemCard key={produto.id} produto={produto} />
+               )
+                  : produto.category === selecionado ?
+                     < ItemCard key={produto.id} produto={produto} /> : (
+                        null
+                     )
             ))
          ) : (
             <div>Não há produtos disponíveis.</div>
-         )}
-      </div>
+         )
+         }
+      </div >
    );
-};
+}
 
 export default ProdutosComponent;

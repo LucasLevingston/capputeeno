@@ -1,12 +1,7 @@
-import Fastify from 'fastify';
-import { GraphQLClient } from 'graphql-request';
-import { ProdutoType } from '../types/product-type';
+import axios from 'axios';
+const url = 'http://localhost:3333/graphql'
 
-const fastify = Fastify({
-   logger: true
-});
-
-export const getProdutos = async (): Promise<ProdutoType[]> => {
+export const getProdutos = async () => {
    const query = `
       query {
          allProducts {
@@ -23,31 +18,49 @@ export const getProdutos = async (): Promise<ProdutoType[]> => {
    `;
 
    try {
-      const client = new GraphQLClient('http://localhost:3333/graphql');
-      const data: { allProducts: ProdutoType[] } = await client.request(query);
-      return data.allProducts;
+      const response = await axios.get(url, {
+         params: {
+            query: query
+         }
+      });
+      return response.data.data.allProducts;
    } catch (error) {
-      fastify.log.error(error);
-      throw new Error('Erro ao obter produtos da API GraphQL');
+      console.error('Erro ao fazer a requisição:', error);
+      throw new Error('Erro ao fazer a requisição');
    }
 };
 
-fastify.get('/produtos', async (request, reply) => {
-   try {
-      const produtos = await getProdutos();
-      reply.send(produtos);
-   } catch (error) {
-      const err: Error = error as Error;
-      reply.status(500).send({ error: err.message });
+export const getProdutoById = async (id: string) => {
+   const query = `
+   query {
+      allProducts {
+         id
+         name
+         description
+         image_url
+         category
+         price_in_cents
+         sales
+         created_at
+      }
    }
-});
+`;
 
-const start = async () => {
    try {
-      await fastify.listen(3000);
-   } catch (err) {
-      fastify.log.error(err);
-      process.exit(1);
+      const response = await axios.get(url, {
+         params: {
+            query: query
+         }
+      });
+
+      const allProducts = response.data.data.allProducts;
+
+      const specificProduct = allProducts.find(produto => produto.id === id);
+
+      return specificProduct;
+   } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+      throw new Error('Erro ao fazer a requisição');
    }
-};
-start();
+
+}

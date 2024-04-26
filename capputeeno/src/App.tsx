@@ -8,7 +8,7 @@ function App() {
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<Catalogo />} caseSensitive={false} />
-				<Route path="/caneca" element={<Produto />} caseSensitive={false} />
+				<Route path="/produto/:id" element={<Produto />} caseSensitive={false} />
 				<Route path="/carrinho" element={<Carrinho />} caseSensitive={false} />
 			</Routes>
 		</BrowserRouter>
