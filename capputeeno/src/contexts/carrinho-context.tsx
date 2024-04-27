@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, Dispatch } from "react";
 import { ProdutoType } from "../types/product-type";
+import { getItemsFromCart } from "../hooks/carrinho-local-storage";
 
 // Definição da interface para os itens do carrinho
 interface CarrinhoType {
@@ -27,50 +28,37 @@ export const CarrinhoContext = createContext<CarrinhoContextType>({
    setCarrinho: () => { },
 });
 
-// Hook personalizado para usar o contexto do carrinho
 export const useCarrinho = () => useContext(CarrinhoContext);
 
-// Props para o CarrinhoProvider
 interface CarrinhoProps {
    children: React.ReactNode;
 }
 
-// Componente do provedor do carrinho
 export const CarrinhoProvider: React.FC<CarrinhoProps> = ({ children }) => {
    const [carrinho, setCarrinho] = useState<CarrinhoType[]>([]);
    const [quantidadeItemsCarrinho, setQuantidadeItemsCarrinho] = useState<number>(0);
 
-   // Função para adicionar um produto ao carrinho
    const adicionarAoCarrinho = (produto: ProdutoType) => {
-      const itemExistente = carrinho.find(item => item.produto.id === produto.id);
+      const items = getItemsFromCart()
+      const itemExistente = items.find(item => item.produto.id === produto.id);
       let novoCarrinho: CarrinhoType[] = [];
-
       if (itemExistente) {
-         novoCarrinho = carrinho.map(item =>
+         novoCarrinho = items.map(item =>
             item.produto.id === produto.id
                ? { ...item, quantidade: item.quantidade + 1 }
                : item
          );
+         console.log("PRODUTO EXISTENTE")
       } else {
-         novoCarrinho = [...carrinho, { produto, quantidade: 1 }];
+         novoCarrinho = [...items, { produto, quantidade: 1 }];
+         console.log("NOVO PRODUTO")
       }
 
-      // Recuperar os itens existentes do localStorage
-      const localStorageItems = localStorage.getItem('carrinho');
-      const itensExistente: CarrinhoType[] = localStorageItems ? JSON.parse(localStorageItems) : [];
-
-      // Combinar os itens existentes com os novos itens do carrinho
-      const carrinhoCompleto = [...itensExistente, ...novoCarrinho];
-
-      // Salvar o resultado de volta no localStorage
-      localStorage.setItem("carrinho", JSON.stringify(carrinhoCompleto));
+      localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
       setCarrinho(novoCarrinho);
    };
 
 
-
-
-   // Função para limpar o carrinho
    const limparCarrinho = () => {
       setQuantidadeItemsCarrinho(0);
       setCarrinho([]);

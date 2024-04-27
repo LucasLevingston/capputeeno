@@ -1,11 +1,8 @@
-import { useParams } from "react-router-dom";
+import { formatarPreco } from "../static";
 import { ProdutoType } from "../types/product-type";
 
 export default function ItemCard({ produto }: { produto: ProdutoType }) {
-	const formatarPreco = (precoEmCentavos: number) => {
-		const precoEmReais = (precoEmCentavos / 100).toFixed(2);
-		return `R$ ${precoEmReais.replace('.', ',')}`;
-	};
+
 	return (
 		<button
 			onClick={() => (window.location.href = `/produto/${produto.id}`)}

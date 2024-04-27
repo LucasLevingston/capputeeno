@@ -1,15 +1,15 @@
-import React from 'react'
 import { getItemsFromCart } from '../hooks/carrinho-local-storage'
 import { CarrinhoType } from '../types/product-type'
-import ItemCard from './ItemCard'
 import ItemCarrinhoCard from './ItemCarrinhoCard'
 
 export default function ItemsCarrinhoComponent() {
    const items = getItemsFromCart()
+   console.log(items)
    return (
       <div className='gap-3 flex flex-col'>
-         {items?.map((produto: CarrinhoType) => {
-            return <ItemCarrinhoCard produto={produto} key={produto.produto.id} />;
+         {items?.map((item: CarrinhoType) => {
+            // { console.log(produto.produto) }
+            return <ItemCarrinhoCard produto={item.produto} quantidade={item.quantidade} key={item.produto.id} />;
          })}
 
       </div>

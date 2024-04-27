@@ -1,10 +1,17 @@
 import Container from '../components/Container';
 import { SlArrowLeftCircle } from 'react-icons/sl';
-import ItemCarrinhoCard from '../components/ItemCarrinhoCard';
-import { limparLocalStorage } from '../hooks/carrinho-local-storage';
+import { carrinhoLenght, limparLocalStorage, valorTotalCarrinho } from '../hooks/carrinho-local-storage';
 import ItemsCarrinhoComponent from '../components/ItemsCarrinhoComponent';
+import { formatarPreco } from '../static';
 
 export default function Carrinho() {
+
+   function valorFrete() {
+      const total = valorTotalCarrinho() < 90000 ? 40 : 0
+      console.log(total)
+      return total
+   }
+
    return (
       <Container>
          <div className='space-y-4'>
@@ -22,7 +29,7 @@ export default function Carrinho() {
                         SEU CARRINHO
                      </h1>
                      <p className='text-[16px]'>
-                        Total (3 produtos)
+                        Total ({carrinhoLenght()} produtos)
                         <span className='font-bold'> R$161,00</span>
                      </p>
                   </div>
@@ -55,7 +62,7 @@ export default function Carrinho() {
                      </div>
                      <div className='flex justify-between font-bold'>
                         <h1>Total</h1>
-                        <h1>R$ 201,00</h1>
+                        <h1>{formatarPreco(valorFrete() + valorTotalCarrinho())}</h1>
                      </div>
                      <div className='flex justify-center items-center'>
                         <div className='flex justify-center  border w-[304px] rounded bg-[#51B853] text-white p-3'>

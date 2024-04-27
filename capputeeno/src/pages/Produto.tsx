@@ -6,6 +6,7 @@ import { getProdutoById, } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
 import { useEffect, useState } from 'react'
 import { useCarrinho } from '../contexts/carrinho-context';
+import { formatarPreco } from '../static';
 
 
 export function Produto() {
@@ -54,7 +55,7 @@ export function Produto() {
 							<h1 className="text-[32px] leading-[48px] text-[#41414D]">
 								{produto.name}
 							</h1>
-							<h1 className="text-[20px] font-bold leading-[30px]">R$ {produto.price_in_cents}</h1>
+							<h1 className="text-[20px] font-bold leading-[30px]">R$ {formatarPreco(produto.price_in_cents)}</h1>
 						</div>
 						<h1 className="text-[12px] leading-[18px] ">
 							*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
