@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { ProdutoType } from "../types/product-type";
 
 export default function ItemCard({ produto }: { produto: ProdutoType }) {
@@ -7,7 +8,7 @@ export default function ItemCard({ produto }: { produto: ProdutoType }) {
 	};
 	return (
 		<button
-			onClick={() => (window.location.href = '/caneca')}
+			onClick={() => (window.location.href = `/produto/${produto.id}`)}
 			className="h-[318px] w-64 overflow-hidden rounded-lg"
 		>
 			<div className="h-[232px]">

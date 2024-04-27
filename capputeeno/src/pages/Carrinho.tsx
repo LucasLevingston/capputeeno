@@ -1,6 +1,8 @@
 import Container from '../components/Container';
 import { SlArrowLeftCircle } from 'react-icons/sl';
 import ItemCarrinhoCard from '../components/ItemCarrinhoCard';
+import { limparLocalStorage } from '../hooks/carrinho-local-storage';
+import ItemsCarrinhoComponent from '../components/ItemsCarrinhoComponent';
 
 export default function Carrinho() {
    return (
@@ -16,7 +18,6 @@ export default function Carrinho() {
             <div className='flex '>
                <div className='w-[60%]  space-y-3'>
                   <div>
-
                      <h1 className='text-[24px] leading-9'>
                         SEU CARRINHO
                      </h1>
@@ -26,7 +27,7 @@ export default function Carrinho() {
                      </p>
                   </div>
                   <div className='gap-4  flex flex-col'>
-                     <ItemCarrinhoCard />
+                     <ItemsCarrinhoComponent />
                   </div>
                </div>
                <div className='bg-white w-[30%] p-6 flex flex-col justify-between h-[700px]'>
@@ -61,6 +62,9 @@ export default function Carrinho() {
                            FINALIZAR A COMPRA
                         </div>
                      </div>
+                     <button onClick={limparLocalStorage} className='flex justify-center  border w-[304px] rounded bg-red-500 text-white p-3'>
+                        LIMPAR CARRINHO
+                     </button>
                   </div>
                   <div className='flex flex-col items-start'>
                      <button className='text-[14px] underline leading-5 text-[#737380]'>AJUDA</button>

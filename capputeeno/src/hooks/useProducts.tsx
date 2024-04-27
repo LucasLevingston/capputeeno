@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ProdutoType } from '../types/product-type';
 const url = 'http://localhost:3333/graphql'
 
 export const getProdutos = async () => {
@@ -23,44 +24,26 @@ export const getProdutos = async () => {
             query: query
          }
       });
-      return response.data.data.allProducts;
+      const produtos = response.data.data.allProducts
+
+      return produtos;
    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-      throw new Error('Erro ao fazer a requisição');
+      console.error('[GET PRODUTO] Erro ao fazer a requisição:', error);
+      throw new Error('[GET PRODUTO] Erro ao fazer a requisição');
    }
 };
 
-export const getProdutoById = async (id: string) => {
-   const query = `
-   query {
-      allProducts {
-         id
-         name
-         description
-         image_url
-         category
-         price_in_cents
-         sales
-         created_at
-      }
-   }
-`;
-
+export const getProdutoById = async (id: string): Promise<ProdutoType> => {
    try {
-      const response = await axios.get(url, {
-         params: {
-            query: query
-         }
-      });
+      const produtos = await getProdutos()
+      const produto = produtos.find((produto: ProdutoType) => produto.id === id);
+      if (!produto) {
+         throw new Error(`Produto com o ID ${id} não encontrado.`);
+      }
 
-      const allProducts = response.data.data.allProducts;
-
-      const specificProduct = allProducts.find(produto => produto.id === id);
-
-      return specificProduct;
+      return produto;
    } catch (error) {
-      console.error('Erro ao fazer a requisição:', error);
-      throw new Error('Erro ao fazer a requisição');
+      console.error('[GET PRODUTO BY ID] Erro ao fazer a requisição:', error);
+      throw new Error('[GET PRODUTO BY ID] Erro ao fazer a requisição');
    }
-
 }

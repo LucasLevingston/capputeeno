@@ -7,4 +7,10 @@ export interface ProdutoType {
    price_in_cents: number;
    sales: number;
    created_at: string;
+   quantidade?: number
+}
+
+export interface CarrinhoType {
+   produto: ProdutoType,
+   quantidade: number
 }

@@ -1,7 +1,10 @@
 import { CiSearch } from 'react-icons/ci';
 import { MdOutlineShoppingBag } from 'react-icons/md';
+import { getItemsFromCart, } from '../hooks/carrinho-local-storage';
 
 export default function Header() {
+
+	getItemsFromCart()
 	return (
 		<div className="flex h-20 w-full items-center justify-between px-5 sm:px-40">
 			<p className="font-saira-stencil text-[40px] text-[#5D5D6D]">
@@ -20,8 +23,12 @@ export default function Header() {
 					onClick={() => {
 						window.location.href = '/carrinho';
 					}}
+					className='flex'
 				>
 					<MdOutlineShoppingBag className="text-[24px] text-[#5D5D6D]" />
+					<div className='bg-red-500 rounded-full size-6 items-center justify-center'>
+						{localStorage.length}
+					</div>
 				</button>
 			</div>
 		</div>

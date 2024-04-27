@@ -1,9 +1,10 @@
 import { SlArrowDown } from 'react-icons/sl';
 import imagem from '../assets/image.png';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import { CarrinhoType } from '../types/product-type';
 
 
-export default function ItemCarrinhoCard() {
+export default function ItemCarrinhoCard({ produto: CarrinhoType }) {
    return (
       <div className="flex rounded-lg w-[736px] overflow-hidden" >
          <div className="w-64 border h-[211px] ">
@@ -12,7 +13,7 @@ export default function ItemCarrinhoCard() {
          <div className="bg-white p-6 w-[480px] flex justify-between flex-col">
             <div className='flex justify-between'>
                <h1 className='text-[20px] leading-7'>
-                  Caneca de cerâmica rústica
+                  {produto.produto.name}
                </h1>
                <FaRegTrashAlt className='text-[#DE3838] text-[24px]' />
             </div>
