@@ -2,9 +2,12 @@ import { SlArrowDown } from 'react-icons/sl';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { CarrinhoType } from '../types/product-type';
 import { formatarPreco } from '../static';
+import { useCarrinho } from '../hooks/useCarrinho';
 
 
 export default function ItemCarrinhoCard({ produto, quantidade }: CarrinhoType) {
+
+   const { removerDoCarrinho } = useCarrinho()
    return (
       <div className="flex rounded-lg w-[736px] overflow-hidden" >
          <div className="w-64 border h-[211px] ">
@@ -15,7 +18,10 @@ export default function ItemCarrinhoCard({ produto, quantidade }: CarrinhoType) 
                <h1 className='text-[20px] leading-7'>
                   {produto.name}
                </h1>
-               <FaRegTrashAlt className='text-[#DE3838] text-[24px]' />
+               <button onClick={() => { removerDoCarrinho(produto) }} >
+
+                  <FaRegTrashAlt className='text-[#DE3838] text-[24px]' />
+               </button>
             </div>
             <h1 className="text-[12px] leading-4 text-[#41414D]">
                {produto.description}

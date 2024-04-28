@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import ItemCard from './ItemCard';
+import ItemCard from './ItemCatalagoCard';
 import { getProdutos } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
 

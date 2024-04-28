@@ -5,8 +5,8 @@ import { useParams } from 'react-router-dom';
 import { getProdutoById, } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
 import { useEffect, useState } from 'react'
-import { useCarrinho } from '../contexts/carrinho-context';
 import { formatarPreco } from '../static';
+import { useCarrinho } from '../hooks/useCarrinho';
 
 
 export function Produto() {

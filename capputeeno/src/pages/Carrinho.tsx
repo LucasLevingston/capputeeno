@@ -1,8 +1,8 @@
 import Container from '../components/Container';
 import { SlArrowLeftCircle } from 'react-icons/sl';
-import { carrinhoLenght, limparLocalStorage, valorTotalCarrinho } from '../hooks/carrinho-local-storage';
 import ItemsCarrinhoComponent from '../components/ItemsCarrinhoComponent';
 import { formatarPreco } from '../static';
+import { useCarrinho } from '../hooks/useCarrinho';
 
 export default function Carrinho() {
 
@@ -11,7 +11,7 @@ export default function Carrinho() {
       console.log(total)
       return total
    }
-
+   const { carrinhoLenght, valorTotalCarrinho, limparCarrinho } = useCarrinho()
    return (
       <Container>
          <div className='space-y-4'>
@@ -30,7 +30,7 @@ export default function Carrinho() {
                      </h1>
                      <p className='text-[16px]'>
                         Total ({carrinhoLenght()} produtos)
-                        <span className='font-bold'> R$161,00</span>
+                        <span className='font-bold'> {formatarPreco(valorTotalCarrinho())}</span>
                      </p>
                   </div>
                   <div className='gap-4  flex flex-col'>
@@ -53,7 +53,7 @@ export default function Carrinho() {
                         </div>
                         <div>
                            <h1>
-                              R$ 161,00
+                              {formatarPreco(valorTotalCarrinho())}
                            </h1>
                            <h1>
                               R$ 40,00
@@ -69,15 +69,20 @@ export default function Carrinho() {
                            FINALIZAR A COMPRA
                         </div>
                      </div>
-                     <button onClick={limparLocalStorage} className='flex justify-center  border w-[304px] rounded bg-red-500 text-white p-3'>
+                  </div>
+                  <div className=''>
+                     <div className='flex flex-col items-start'>
+                        <button className='text-[14px] underline leading-5 text-[#737380]'>AJUDA</button>
+                        <button className='text-[14px] underline leading-5 text-[#737380]'>REEMBOLSOS</button>
+                        <button className='text-[14px] underline leading-5 text-[#737380]'>ENTREGAS E FRETE</button>
+                        <button className='text-[14px] underline leading-5 text-[#737380]'>TROCAS E DEVOLUÇÕES</button>
+                     </div>
+                     <button
+                        className='flex justify-center items-center border w-[304px] rounded bg-red-500 text-white p-3'
+                        onClick={limparCarrinho}
+                     >
                         LIMPAR CARRINHO
                      </button>
-                  </div>
-                  <div className='flex flex-col items-start'>
-                     <button className='text-[14px] underline leading-5 text-[#737380]'>AJUDA</button>
-                     <button className='text-[14px] underline leading-5 text-[#737380]'>REEMBOLSOS</button>
-                     <button className='text-[14px] underline leading-5 text-[#737380]'>ENTREGAS E FRETE</button>
-                     <button className='text-[14px] underline leading-5 text-[#737380]'>TROCAS E DEVOLUÇÕES</button>
                   </div>
                </div>
             </div>

@@ -1,10 +1,9 @@
 import { CiSearch } from 'react-icons/ci';
 import { MdOutlineShoppingBag } from 'react-icons/md';
-import { carrinhoLenght, getItemsFromCart, } from '../hooks/carrinho-local-storage';
+import { useCarrinho } from '../hooks/useCarrinho';
 
 export default function Header() {
-
-	getItemsFromCart()
+	const { carrinhoLenght } = useCarrinho()
 	return (
 		<div className="flex h-20 w-full items-center justify-between px-5 sm:px-40">
 			<p className="font-saira-stencil text-[40px] text-[#5D5D6D]">
