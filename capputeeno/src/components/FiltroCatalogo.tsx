@@ -5,12 +5,18 @@ import DropdownFilter from './DropdownFilter';
 
 interface FiltroCatalogoProps {
    paginaAtual: number;
+   setPaginaAtual: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const FiltroCatalogo: React.FC<FiltroCatalogoProps> = ({ paginaAtual: paginaAtualProp }) => {
+const FiltroCatalogo: React.FC<FiltroCatalogoProps> = ({ paginaAtual: paginaAtualProp, setPaginaAtual }) => {
    const [dropdown, setDropdown] = useState(false);
-   const [paginaAtual, setPaginaAtual] = useState(paginaAtualProp);
+   const [paginaAtual, setLocalPaginaAtual] = useState(paginaAtualProp);
    const paginaIndex = [1, 2, 3, 4, 5];
+
+   const handlePaginaChange = (novaPagina: number) => {
+      setLocalPaginaAtual(novaPagina);
+      setPaginaAtual(novaPagina);
+   };
 
    return (
       <div className="space-y-4 flex flex-col">
@@ -27,10 +33,7 @@ const FiltroCatalogo: React.FC<FiltroCatalogoProps> = ({ paginaAtual: paginaAtua
             {paginaIndex.map((index) => (
                paginaAtual === index ?
                   <PageButton disabled key={index} bgColor='black' >{index}</PageButton> :
-                  <PageButton key={index} onClick={() => {
-                     setPaginaAtual(index)
-
-                  }}>{index}</PageButton>
+                  <PageButton key={index} onClick={() => handlePaginaChange(index)}>{index}</PageButton>
             ))}
             <div className="flex">
                {paginaAtual === 1 ? (
@@ -38,7 +41,7 @@ const FiltroCatalogo: React.FC<FiltroCatalogoProps> = ({ paginaAtual: paginaAtua
                      <SlArrowLeft />
                   </PageButton>
                ) :
-                  <PageButton onClick={() => { setPaginaAtual(paginaAtual - 1) }}>
+                  <PageButton onClick={() => handlePaginaChange(paginaAtual - 1)}>
                      <SlArrowLeft />
                   </PageButton>
                }
@@ -47,7 +50,7 @@ const FiltroCatalogo: React.FC<FiltroCatalogoProps> = ({ paginaAtual: paginaAtua
                      <SlArrowRight />
                   </PageButton>
                ) :
-                  <PageButton onClick={() => { setPaginaAtual(paginaAtual + 1) }}>
+                  <PageButton onClick={() => handlePaginaChange(paginaAtual + 1)}>
                      <SlArrowRight />
                   </PageButton>
                }

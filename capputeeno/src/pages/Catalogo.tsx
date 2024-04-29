@@ -5,7 +5,7 @@ import FiltroCatalogo from '../components/FiltroCatalogo';
 
 export default function Catalogo() {
 	const [botaoSelecionado, setBotaoSelecionado] = useState('all');
-	const [paginaAtual,] = useState(1);
+	const [paginaAtual, setPaginaAtual] = useState(1);
 
 	return (
 		<div className="">
@@ -45,7 +45,7 @@ export default function Catalogo() {
 							<li>CANECAS</li>
 						</button>
 					</ul>
-					<FiltroCatalogo paginaAtual={paginaAtual} />
+					<FiltroCatalogo paginaAtual={paginaAtual} setPaginaAtual={setPaginaAtual} />
 				</div>
 				<ProdutosComponent selecionado={botaoSelecionado} paginaAtual={paginaAtual} />
 			</Container >

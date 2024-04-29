@@ -5,7 +5,6 @@ import ItemCarrinhoCard from './ItemCarrinhoCard'
 export default function ItemsCarrinhoComponent() {
    const { getITodosItems } = useCarrinho()
    const items = getITodosItems()
-   console.log(items)
    return (
       <div className='gap-3 flex flex-col'>
          {items?.map((item: CarrinhoType) => {

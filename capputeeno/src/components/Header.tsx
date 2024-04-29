@@ -6,9 +6,12 @@ export default function Header() {
 	const { carrinhoLenght } = useCarrinho()
 	return (
 		<div className="flex h-20 w-full items-center justify-between px-5 sm:px-40">
-			<p className="font-saira-stencil text-[40px] text-[#5D5D6D]">
-				capputeeno
-			</p>
+			<button onClick={() => { window.location.href = "/" }}>
+
+				<p className="font-saira-stencil text-[40px] text-[#5D5D6D]">
+					capputeeno
+				</p>
+			</button>
 			<div className="flex items-center space-x-5">
 				<div className="flex h-0 w-0 items-center rounded-lg bg-[#F3F5F6] p-2 sm:h-10 sm:w-[352px] ">
 					<input

@@ -8,7 +8,7 @@ function ProdutosComponent({ selecionado, paginaAtual }: { selecionado: string, 
    const [produtos, setProdutos] = useState<ProdutoType[]>([]);
 
    const startIndex = (paginaAtual - 1) * 12;
-   const endIndex = startIndex + 12;
+   const endIndex = Math.min(startIndex + 12, produtos.length);
 
    useEffect(() => {
       const fetchProdutos = async () => {
@@ -19,9 +19,9 @@ function ProdutosComponent({ selecionado, paginaAtual }: { selecionado: string, 
             console.error('Erro ao buscar produtos:', error);
          }
       };
-
       fetchProdutos();
    }, [paginaAtual]);
+
 
    return (
       <div className="flex flex-wrap gap-20 pt-[30px]">
@@ -32,7 +32,7 @@ function ProdutosComponent({ selecionado, paginaAtual }: { selecionado: string, 
 
                )
                   : produto.category === selecionado ?
-                     < ItemCard key={produto.id} produto={produto} /> : (
+                     <ItemCard key={produto.id} produto={produto} /> : (
                         null
                      )
             ))

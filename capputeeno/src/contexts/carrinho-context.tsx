@@ -106,7 +106,6 @@ export const CarrinhoProvider: React.FC<CarrinhoProps> = ({ children }) => {
          QuantidadeAtualizadaAlerta(item, novaQuantidade)
          return novaQuantidade;
       } else {
-         console.log("Inexistente");
          return novaQuantidade;
       }
    };
