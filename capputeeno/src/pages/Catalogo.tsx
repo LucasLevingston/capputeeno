@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Container from '../components/Container';
-import PageButton from '../components/PageButton';
-import { SlArrowDown, SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import ProdutosComponent from '../components/ProdutosComponent';
+import FiltroCatalogo from '../components/FiltroCatalogo';
 
 export default function Catalogo() {
 	const [botaoSelecionado, setBotaoSelecionado] = useState('all');
+	const [paginaAtual,] = useState(1);
 
 	return (
 		<div className="">
@@ -45,29 +45,9 @@ export default function Catalogo() {
 							<li>CANECAS</li>
 						</button>
 					</ul>
-					<div className="space-y-4">
-						<div className="flex items-center justify-end gap-2 text-[#737380]">
-							<span>Organizar por</span>
-							<SlArrowDown />
-						</div>
-						<div className="flex items-center justify-center gap-1">
-							<PageButton>1</PageButton>
-							<PageButton>2</PageButton>
-							<PageButton>3</PageButton>
-							<PageButton>4</PageButton>
-							<PageButton>5</PageButton>
-							<div className="flex">
-								<PageButton>
-									<SlArrowLeft />
-								</PageButton>
-								<PageButton>
-									<SlArrowRight />
-								</PageButton>
-							</div>
-						</div>
-					</div>
+					<FiltroCatalogo paginaAtual={paginaAtual} />
 				</div>
-				<ProdutosComponent selecionado={botaoSelecionado} />
+				<ProdutosComponent selecionado={botaoSelecionado} paginaAtual={paginaAtual} />
 			</Container >
 		</div >
 	);

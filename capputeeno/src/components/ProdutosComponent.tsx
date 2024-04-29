@@ -3,9 +3,12 @@ import ItemCard from './ItemCatalagoCard';
 import { getProdutos } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
 
-function ProdutosComponent({ selecionado }: { selecionado: string }) {
+function ProdutosComponent({ selecionado, paginaAtual }: { selecionado: string, paginaAtual: number }) {
 
    const [produtos, setProdutos] = useState<ProdutoType[]>([]);
+
+   const startIndex = (paginaAtual - 1) * 12;
+   const endIndex = startIndex + 12;
 
    useEffect(() => {
       const fetchProdutos = async () => {
@@ -18,13 +21,15 @@ function ProdutosComponent({ selecionado }: { selecionado: string }) {
       };
 
       fetchProdutos();
-   }, []);
+   }, [paginaAtual]);
+
    return (
       <div className="flex flex-wrap gap-20 pt-[30px]">
          {produtos && produtos.length > 0 ? (
-            produtos.slice(0, 12).map(produto => (
+            produtos.slice(startIndex, endIndex).map(produto => (
                selecionado === 'all' ? (
                   <ItemCard key={produto.id} produto={produto} />
+
                )
                   : produto.category === selecionado ?
                      < ItemCard key={produto.id} produto={produto} /> : (
@@ -36,6 +41,7 @@ function ProdutosComponent({ selecionado }: { selecionado: string }) {
          )
          }
       </div >
+
    );
 }
 

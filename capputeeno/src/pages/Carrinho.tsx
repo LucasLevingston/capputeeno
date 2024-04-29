@@ -8,7 +8,6 @@ export default function Carrinho() {
 
    function valorFrete() {
       const total = valorTotalCarrinho() < 90000 ? 40 : 0
-      console.log(total)
       return total
    }
    const { carrinhoLenght, valorTotalCarrinho, limparCarrinho } = useCarrinho()
@@ -56,7 +55,7 @@ export default function Carrinho() {
                               {formatarPreco(valorTotalCarrinho())}
                            </h1>
                            <h1>
-                              R$ 40,00
+                              R$ {valorFrete()},00
                            </h1>
                         </div>
                      </div>

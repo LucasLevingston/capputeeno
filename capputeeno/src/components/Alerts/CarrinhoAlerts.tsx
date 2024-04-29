@@ -19,3 +19,9 @@ export const RemoverDoCarrinhoAlerta = (produto: ProdutoType) => {
       window.location.reload()
    }, 2000);
 }
+export const QuantidadeAtualizadaAlerta = (produto: ProdutoType, novaQuantidade: number) => {
+   toast.success(`Produto: ${produto.name}. Quantidade alterada para ${novaQuantidade}.`);
+   setTimeout(() => {
+      window.location.reload()
+   }, 2000);
+}

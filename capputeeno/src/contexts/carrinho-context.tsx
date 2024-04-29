@@ -1,6 +1,6 @@
 import React, { createContext, useState, Dispatch } from "react";
 import { CarrinhoType, ProdutoType } from "../types/product-type";
-import { AdicionadoAoCarrinhoAlerta, LimparCarrinhoAlerta, RemoverDoCarrinhoAlerta } from "../components/Alerts/CarrinhoAlerts";
+import { AdicionadoAoCarrinhoAlerta, LimparCarrinhoAlerta, QuantidadeAtualizadaAlerta, RemoverDoCarrinhoAlerta } from "../components/Alerts/CarrinhoAlerts";
 
 interface CarrinhoContextType {
    carrinho: CarrinhoType[];
@@ -11,6 +11,7 @@ interface CarrinhoContextType {
    carrinhoLenght: () => number;
    valorTotalCarrinho: () => number;
    getITodosItems: () => CarrinhoType[]
+   alterarQuantidadeDoProduto: (produto: ProdutoType, novaQuantidade: number) => number
    setCarrinho: Dispatch<CarrinhoType[]>;
 }
 
@@ -23,6 +24,7 @@ export const CarrinhoContext = createContext<CarrinhoContextType>({
    carrinhoLenght: () => 0,
    valorTotalCarrinho: () => 0,
    getITodosItems: () => [],
+   alterarQuantidadeDoProduto: () => 0,
    setCarrinho: () => { },
 });
 
@@ -45,10 +47,8 @@ export const CarrinhoProvider: React.FC<CarrinhoProps> = ({ children }) => {
                ? { ...item, quantidade: item.quantidade + 1 }
                : item
          );
-         console.log("PRODUTO EXISTENTE")
       } else {
          novoCarrinho = [...items, { produto, quantidade: 1 }];
-         console.log("NOVO PRODUTO")
       }
 
       localStorage.setItem("carrinho", JSON.stringify(novoCarrinho));
@@ -86,19 +86,38 @@ export const CarrinhoProvider: React.FC<CarrinhoProps> = ({ children }) => {
       return total
    }
 
-
    const limparCarrinho = () => {
       setQuantidadeItemsCarrinho(0);
       setCarrinho([]);
       localStorage.clear();
       LimparCarrinhoAlerta()
    };
+   const alterarQuantidadeDoProduto = (item: ProdutoType, novaQuantidade: number) => {
+      const items = getITodosItems();
+
+      if (items.some(produto => produto.produto.id === item.id)) {
+         const novoCarrinho = items.map(itemAntigo =>
+            itemAntigo.produto.id === item.id
+               ? { ...itemAntigo, quantidade: novaQuantidade }
+               : itemAntigo
+         );
+
+         localStorage.setItem('carrinho', JSON.stringify(novoCarrinho));
+         QuantidadeAtualizadaAlerta(item, novaQuantidade)
+         return novaQuantidade;
+      } else {
+         console.log("Inexistente");
+         return novaQuantidade;
+      }
+   };
+
+
 
    return (
       <CarrinhoContext.Provider
          value={{
             carrinho, adicionarAoCarrinho, limparCarrinho, carrinhoLenght, getITodosItems, valorTotalCarrinho, quantidadeItemsCarrinho,
-            setCarrinho, removerDoCarrinho
+            setCarrinho, removerDoCarrinho, alterarQuantidadeDoProduto
          }}>
          {children}
       </CarrinhoContext.Provider>

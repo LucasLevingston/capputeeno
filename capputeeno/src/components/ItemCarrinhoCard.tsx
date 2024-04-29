@@ -3,11 +3,14 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 import { CarrinhoType } from '../types/product-type';
 import { formatarPreco } from '../static';
 import { useCarrinho } from '../hooks/useCarrinho';
+import { useState } from 'react';
+import { DropdownItensCarrinho } from './DropdownItensCarrinho';
 
 
 export default function ItemCarrinhoCard({ produto, quantidade }: CarrinhoType) {
-
+   const [dropdown, setDropdown] = useState(false)
    const { removerDoCarrinho } = useCarrinho()
+
    return (
       <div className="flex rounded-lg w-[736px] overflow-hidden" >
          <div className="w-64 border h-[211px] ">
@@ -28,10 +31,12 @@ export default function ItemCarrinhoCard({ produto, quantidade }: CarrinhoType) 
             </h1>
             <div className='flex justify-between'>
                <button
-                  className=" h-8 w-16 rounded-lg gap-5 bg-[#E9E9F0] flex items-center justify-center border border-[#A8A8B3]"
+                  className="h-8 w-16 rounded-lg gap-5 bg-[#E9E9F0] flex items-center justify-center border border-[#A8A8B3]"
+                  onClick={() => { setDropdown(!dropdown) }}
                >
-                  <span className='text-[16px] text-[#737380]'>
+                  <span className='text-[16px] text-[#737380]' >
                      {quantidade}
+                     {dropdown ? <DropdownItensCarrinho produto={produto} /> : null}
                   </span>
                   <SlArrowDown className='w-[8px]' />
                </button>
