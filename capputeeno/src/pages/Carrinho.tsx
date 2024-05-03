@@ -3,11 +3,15 @@ import { SlArrowLeftCircle } from 'react-icons/sl';
 import ItemsCarrinhoComponent from '../components/ItemsCarrinhoComponent';
 import { formatarPreco } from '../static';
 import { useCarrinho } from '../hooks/useCarrinho';
+import { FaRegTrashAlt } from 'react-icons/fa';
 
 export default function Carrinho() {
 
    function valorFrete() {
-      const total = valorTotalCarrinho() < 90000 ? 40 : 0
+      if (valorTotalCarrinho() === 0) {
+         return 0
+      }
+      const total = valorTotalCarrinho() < 90000 ? 4000 : 0
       return total
    }
    const { carrinhoLenght, valorTotalCarrinho, limparCarrinho } = useCarrinho()
@@ -15,7 +19,7 @@ export default function Carrinho() {
       <Container>
          <div className='space-y-4'>
             <button
-               onClick={() => (window.location.href = '/')}
+               onClick={() => (window.history.back())}
                className="flex items-center gap-2 pt-[25px]"
             >
                <SlArrowLeftCircle />
@@ -23,14 +27,27 @@ export default function Carrinho() {
             </button>
             <div className='flex '>
                <div className='w-[60%]  space-y-3'>
-                  <div>
-                     <h1 className='text-[24px] leading-9'>
-                        SEU CARRINHO
-                     </h1>
-                     <p className='text-[16px]'>
-                        Total ({carrinhoLenght()} produtos)
-                        <span className='font-bold'> {formatarPreco(valorTotalCarrinho())}</span>
-                     </p>
+                  <div className='flex justify-between w-[90%]'>
+                     <div>
+
+                        <h1 className='text-[24px] leading-9'>
+                           SEU CARRINHO
+                        </h1>
+                        <p className='text-[16px]'>
+                           Total ({carrinhoLenght()} produtos)
+                           <span className='font-bold'> {formatarPreco(valorTotalCarrinho())}</span>
+                        </p>
+                     </div>
+                     <div className='items-center flex justify-center'>
+
+                        <button
+                           className='flex justify-center items-center  w-[50px] rounded  text-white p-3'
+                           onClick={limparCarrinho}
+                        >
+                           <FaRegTrashAlt className='text-[#DE3838] text-[24px]' />
+
+                        </button>
+                     </div>
                   </div>
                   <div className='gap-4  flex flex-col'>
                      <ItemsCarrinhoComponent />
@@ -55,7 +72,7 @@ export default function Carrinho() {
                               {formatarPreco(valorTotalCarrinho())}
                            </h1>
                            <h1>
-                              R$ {valorFrete()},00
+                              {formatarPreco(valorFrete())}
                            </h1>
                         </div>
                      </div>
@@ -64,24 +81,21 @@ export default function Carrinho() {
                         <h1>{formatarPreco(valorFrete() + valorTotalCarrinho())}</h1>
                      </div>
                      <div className='flex justify-center items-center'>
-                        <div className='flex justify-center  border w-[304px] rounded bg-[#51B853] text-white p-3'>
-                           FINALIZAR A COMPRA
-                        </div>
+                        <button>
+                           <div className='flex justify-center  border w-[304px] rounded bg-[#51B853] text-white p-3'>
+                              FINALIZAR A COMPRA
+                           </div>
+                        </button>
                      </div>
                   </div>
-                  <div className=''>
+                  <div className='space-y-2'>
                      <div className='flex flex-col items-start'>
                         <button className='text-[14px] underline leading-5 text-[#737380]'>AJUDA</button>
                         <button className='text-[14px] underline leading-5 text-[#737380]'>REEMBOLSOS</button>
                         <button className='text-[14px] underline leading-5 text-[#737380]'>ENTREGAS E FRETE</button>
                         <button className='text-[14px] underline leading-5 text-[#737380]'>TROCAS E DEVOLUÇÕES</button>
                      </div>
-                     <button
-                        className='flex justify-center items-center border w-[304px] rounded bg-red-500 text-white p-3'
-                        onClick={limparCarrinho}
-                     >
-                        LIMPAR CARRINHO
-                     </button>
+
                   </div>
                </div>
             </div>

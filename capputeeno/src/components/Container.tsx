@@ -12,7 +12,7 @@ const Container: React.FC<ContainerProps> = ({ children }) => {
 			<Header />
 			<div className="h-full w-full bg-[#F0F0F5] px-5 py-[34px] md:px-40 min-h-screen">
 				{children}
-				<Toaster position="bottom-right" richColors />
+				<Toaster position="top-right" richColors />
 			</div>
 		</div>
 	);

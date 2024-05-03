@@ -39,7 +39,7 @@ export function Produto() {
 		<Container>
 
 			<button
-				onClick={() => (window.location.href = '/')}
+				onClick={() => (window.history.back())}
 				className="flex items-center gap-2 pt-[25px]"
 			>
 				<SlArrowLeftCircle />
