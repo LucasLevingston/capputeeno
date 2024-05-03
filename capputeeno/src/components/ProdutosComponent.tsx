@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { getProdutos } from '../hooks/useProducts';
 import { ProdutoType } from '../types/product-type';
-import ItemCard from './ItemCatalagoCard';
+import ItemCatalagoCard from './ItemCatalagoCard';
 
-function ProdutosComponent({ selecionado, paginaAtual, filtroAtual }: { selecionado: string, paginaAtual: number, filtroAtual: string }) {
+function ProdutosComponent({ selecionado, paginaAtual, filtroAtual, pesquisa }:
+   { selecionado: string, paginaAtual: number, filtroAtual: string, pesquisa?: string }) {
 
    const [produtos, setProdutos] = useState<ProdutoType[]>([]);
    const startIndex = (paginaAtual - 1) * 12;
@@ -32,19 +33,22 @@ function ProdutosComponent({ selecionado, paginaAtual, filtroAtual }: { selecion
 
    }
 
-
    useEffect(() => {
       const fetchProdutos = async () => {
          try {
-            const produtosData = await getProdutos();
+            const produtosData: ProdutoType[] = await getProdutos();
+            let produtos = produtosData
+            if (pesquisa) {
+               produtos = produtosData.filter(product => product.name.toLowerCase().includes(pesquisa.toLowerCase()));
+            }
 
-            setProdutos(filterProducts(produtosData, filtroAtual));
+            setProdutos(filterProducts(produtos, filtroAtual));
          } catch (error) {
             console.error('Erro ao buscar produtos:', error);
          }
       };
       fetchProdutos();
-   }, [paginaAtual, filtroAtual]);
+   }, [paginaAtual, filtroAtual, pesquisa]);
 
 
    return (
@@ -52,11 +56,11 @@ function ProdutosComponent({ selecionado, paginaAtual, filtroAtual }: { selecion
          {produtos && produtos.length > 0 ? (
             produtos.slice(startIndex, endIndex).map(produto => (
                selecionado === 'all' ? (
-                  <ItemCard key={produto.id} produto={produto} />
+                  <ItemCatalagoCard key={produto.id} produto={produto} />
 
                )
                   : produto.category === selecionado ?
-                     <ItemCard key={produto.id} produto={produto} /> : (
+                     <ItemCatalagoCard key={produto.id} produto={produto} /> : (
                         null
                      )
             ))

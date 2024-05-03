@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SlArrowDown, SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 import PageButton from './PageButton';
 import DropdownFilter from './DropdownFilter';
@@ -17,9 +17,6 @@ const FiltroCatalogo: React.FC<FiltroCatalogoProps> =
       const [filtroAtual, setLocalFiltroAtual] = useState<string>(FiltroAtualProp);
       const [paginaAtual, setLocalPaginaAtual] = useState(paginaAtualProp);
       const paginaIndex = [1, 2, 3, 4, 5];
-      useEffect(() => {
-         console.log(paginaAtual)
-      }, [paginaAtual])
 
       const handlePaginaChange = (novaPagina: number) => {
          setLocalPaginaAtual(novaPagina);

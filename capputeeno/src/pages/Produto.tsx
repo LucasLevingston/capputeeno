@@ -7,6 +7,7 @@ import { ProdutoType } from '../types/product-type';
 import { useEffect, useState } from 'react'
 import { formatarPreco } from '../static';
 import { useCarrinho } from '../hooks/useCarrinho';
+import { Header } from '../components/Header';
 
 
 export function Produto() {
@@ -37,46 +38,48 @@ export function Produto() {
 
 	return (
 		<Container>
+			<Header />
+			<div className="h-full w-full bg-[#F0F0F5] px-5 py-[34px] md:px-40 min-h-screen">
+				<button
+					onClick={() => (window.history.back())}
+					className="flex items-center gap-2 pt-[25px]"
+				>
+					<SlArrowLeftCircle />
+					Voltar
+				</button>
 
-			<button
-				onClick={() => (window.history.back())}
-				className="flex items-center gap-2 pt-[25px]"
-			>
-				<SlArrowLeftCircle />
-				Voltar
-			</button>
-
-			<div className="flex flex-col gap-8 pt-11 sm:flex-row">
-				<img src={produto.image_url} alt="" className="h-[580px] w-[640px] border " />
-				<div className="flex flex-col justify-between">
-					<div className="space-y-8">
-						<p className="text-[16px] leading-[24px] ">{produto.category}</p>
-						<div>
-							<h1 className="text-[32px] leading-[48px] text-[#41414D]">
-								{produto.name}
+				<div className="flex flex-col sm:gap-8 gap-3 pt-11 sm:flex-row ">
+					<img src={produto.image_url} alt="" className="sm:h-[580px] w-[640px] border  h-[330px]" />
+					<div className="flex flex-col justify-between">
+						<div className="space-y-8">
+							<p className="text-[16px] leading-[24px] ">{produto.category}</p>
+							<div>
+								<h1 className="text-[32px] leading-[48px] text-[#41414D]">
+									{produto.name}
+								</h1>
+								<h1 className="text-[20px] font-bold leading-[30px]">{formatarPreco(produto.price_in_cents)}</h1>
+							</div>
+							<h1 className="text-[12px] leading-[18px] ">
+								*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
+								R$900,00.
 							</h1>
-							<h1 className="text-[20px] font-bold leading-[30px]">R$ {formatarPreco(produto.price_in_cents)}</h1>
+							<div className="pt-8">
+								<h1 className="text-[16px] leading-6 text-[#737380]">
+									Descrição
+								</h1>
+								<h1 className="text-[14px] leading-[21px]">
+									{produto.description}
+								</h1>
+							</div>
 						</div>
-						<h1 className="text-[12px] leading-[18px] ">
-							*Frete de R$40,00 para todo o Brasil. Grátis para compras acima de
-							R$900,00.
-						</h1>
-						<div className="pt-8">
-							<h1 className="text-[16px] leading-6 text-[#737380]">
-								Descrição
-							</h1>
-							<h1 className="text-[14px] leading-[21px]">
-								{produto.description}
-							</h1>
-						</div>
+						<button
+							onClick={() => adicionarAoCarrinho(produto)}
+							className="flex h-11 sm:w-[448px] mt-3 items-center justify-center sm:gap-3 gap-1 rounded bg-[#115D8C] text-white"
+						>
+							<MdOutlineShoppingBag className=" flex text-[24px] items-center justify-center" />
+							<p className="flex text-[16px] leading-[24px] items-center justify-center">ADICIONAR AO CARRINHO</p>
+						</button>
 					</div>
-					<button
-						onClick={() => adicionarAoCarrinho(produto)}
-						className="flex h-11 w-[448px] items-center justify-center gap-3 rounded bg-[#115D8C] text-white"
-					>
-						<MdOutlineShoppingBag className="text-[24px] " />
-						<p className="text-[16px] leading-[24px]">ADICIONAR AO CARRINHO</p>
-					</button>
 				</div>
 			</div>
 		</Container >
