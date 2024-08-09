@@ -1,10 +1,6 @@
-# E-commerce Capputeeno
+# Capputeeno
 
-Olá! Este é o projeto do e-commerce de canecas e camisetas, desenvolvido como parte do desafio de Front end.
-
-## Sobre o Projeto
-
-Este projeto foi uma oportunidade incrível para exercitar minhas habilidades de desenvolvimento front end.
+Um E-Commerce para vendas de canecas e camisetas desenvolvido em React, Tailwind, Node, Vite, Typescript e Vite.
 
 ## Funcionalidades Implementadas
 
@@ -14,9 +10,11 @@ Este projeto foi uma oportunidade incrível para exercitar minhas habilidades de
 
 ## Tecnologias Utilizadas
 
-- React e Typescript para o desenvolvimento da aplicação.
-- TailwindCSS para estilização dos componentes.
-- Local storage para gerenciamento do carrinho de compras.
+![React.js](https://img.shields.io/badge/-React.js-0D1117?style=for-the-badge&logo=react&labelColor=0D1117)&nbsp;</br>
+![Tailwind CSS](https://img.shields.io/badge/-Tailwind%20CSS-0D1117?style=for-the-badge&logo=tailwind-css&labelColor=0D1117)&nbsp;</br>
+![Node.JS](https://img.shields.io/badge/-Node.JS-0D1117?style=for-the-badge&logo=node.js&labelColor=0D1117&textColor=0D1117)&nbsp;</br>
+![TypeScript](https://img.shields.io/badge/-TypeScript-0D1117?style=for-the-badge&logo=typescript&labelColor=0D1117)&nbsp;</br>
+![Vite](https://img.shields.io/badge/-Vite-0D1117?style=for-the-badge&logo=Vite&labelColor=0D1117)&nbsp;
 
 ## Como Executar o Projeto
 
